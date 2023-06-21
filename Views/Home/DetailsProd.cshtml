@@ -1,0 +1,31 @@
+@model Product
+
+
+<div class="text-center">
+    <h1>@Model.Name</h1>
+</div>
+
+<div class="text-center row mt-5">
+    <div class="col-md-6">
+        <h5>Categories</h5>
+        @foreach (Association ass in Model.AssCat)
+        {
+            <p>@ass.Category?.Name</p>
+        }
+    </div>
+    <div class="col-md-6">
+        <h5>Add Category</h5>
+        <form asp-controller="Home" asp-action="CreateCatToProduct" method="post">
+            <input type="hidden" name="ProductId" value="@Model.ProductId" />
+            <select class="form-select" name="CategoryId">
+                <option value="">-- Select Category --</option>
+                @foreach (Category category in ViewBag.Categories)
+                {
+                    <option value="@category.CatId">@category.Name</option>
+                }
+            </select>
+            <br>
+            <button type="submit" class="btn btn-primary">Add Category</button>
+        </form>
+    </div>
+</div>

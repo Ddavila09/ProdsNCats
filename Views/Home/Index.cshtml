@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "Products";
+}
+@model List<Product>
+
+<div class="text-center">
+    <h1 class="display-4">Welcome</h1>
+    <a href="/">Products</a> | <a href="category">Categories</a>
+</div>
+
+<div class="row mt-5">
+    <div class="col-md-6">
+        @await Html.PartialAsync("_AddProd", new Product())
+    </div>
+    <div class="col-md-6">
+        <h1 class="display-4 text-center">All Products</h1>
+        @foreach (Product product in Model)
+        {
+            <div class="row-md text-center">
+                <div class="col">
+                    <br>
+                    <a class="text-center" asp-controller="Home" asp-action="ViewProduct"
+                        asp-route-ProductId="@product.ProductId">@product.Name</a>
+                    <br>
+                </div>
+            </div>
+        }
+    </div>
+</div>
